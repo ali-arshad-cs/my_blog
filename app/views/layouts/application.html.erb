@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Blog</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
+<body>
 <div id="sidebar">
   <div id="logo">
     <%= link_to root_path do %>
-    <%= image_tag "logo.svg" %>
+        <%= image_tag "logo.svg" %>
     <% end %>
   </div>
   <ul>
@@ -33,7 +33,15 @@
 </div>
 <div id="main_content">
   <div id="header">
-    <p>All Posts</p>
+
+
+    <% if current_page?(root_path) %>
+        <p>All Posts</p>
+    <% else %>
+        <%= link_to "Back to All Posts", root_path %>
+    <% end %>
+
+
     <div class="buttons">
       <button class="button"><%= link_to "New Post", new_post_path %></button>
       <button class="button">Log Out</button>
@@ -43,9 +51,9 @@
   <% flash.each do |name, msg| %>
       <%= content_tag(:div, msg, class: "alert") %>
   <% end %>
-         <%= yield %>
+  <%= yield %>
 </div>
 
 
-  </body>
+</body>
 </html>
